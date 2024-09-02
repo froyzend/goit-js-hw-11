@@ -1,10 +1,9 @@
-// Імпорт функції для запиту до API
+
 import { getGalleryData } from './js/pixabay-api';
 
-// Імпорт функцій для роботи з інтерфейсом з файлу render-functions.js
+
 import { addLoader, removeLoader, markup } from './js/render-functions';
 
-// Описаний у документації
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 

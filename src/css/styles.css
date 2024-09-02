@@ -10,6 +10,7 @@
 @import url('./container.css');
 @import url('./animations.css');
 
+
 .search-form {
   width: 100%;
   padding: 10px;
@@ -47,23 +48,32 @@
 
 .gallery-item {
   max-width: 360px;
+  height: 100%;
+  transition: transform 250ms ease-in-out, box-shadows 250ms ease-in-out;
+}
+
+.gallery-item:hover {
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+  transform: scale(1.05);
 }
 
 .gallery-image {
   display: block;
-  width: 100%;
-  height: auto;
+  width: 360px;
+  height: 200px;
+  object-fit: cover;
   border-radius: 5px;
 }
 
 .img-content-wrapper {
+  padding: 5px 10px;
   display: flex;
   gap: 27px;
   border-bottom: 1px solid #808080;
   border-left: 1px solid #808080;
   border-right: 1px solid #808080;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 
