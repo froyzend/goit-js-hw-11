@@ -10,9 +10,65 @@
 @import url('./container.css');
 @import url('./animations.css');
 
-/* Sections style */
-@import url('./header.css');
-@import url('./vite-promo.css');
-@import url('./badges.css');
-@import url('./back-link.css');
-@import url('./footer.css');
+.search-form {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.search-form>input {
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background-color: #dcd0d0;
+}
+
+.search-form>button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(34, 156, 156);
+  color: #fff;
+  font-weight: 700;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 24px 24px;
+  justify-content: center;
+  align-items: center;
+}
+
+.gallery-item {
+  max-width: 360px;
+}
+
+.gallery-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.img-content-wrapper {
+  display: flex;
+  gap: 27px;
+  border-bottom: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #808080;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.img-content-descr {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
