@@ -18,7 +18,7 @@ export function removeLoader() {
 
 
 export function markup(data) {
-  // Створюємо HTML-розмітку для кожного зображення
+ 
   return data.hits
     .map(
       ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
@@ -39,6 +39,6 @@ export function markup(data) {
             </li>
       `
     )
-    .join(''); // Перетворюємо масив у строку HTML
+    .join(''); 
 }
 

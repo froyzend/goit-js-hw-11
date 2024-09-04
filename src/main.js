@@ -29,15 +29,15 @@ function onSubmitForm(event) {
     return;
   }
 
-  // Очищуємо галерею перед новим запитом
+  
   gallery.innerHTML = '';
 
-  // Додаємо анімацію лоадера
+  
   addLoader(gallery);
 
-  // Перевіряємо, чи є інстанція lightbox, і чи існують елементи в галереї
+
   if (lightbox) {
-    lightbox.destroy(); // Знищуємо попередню інстанцію, якщо вона існує
+    lightbox.destroy();
   }
 
   getGalleryData(searchValue)
@@ -55,7 +55,7 @@ function onSubmitForm(event) {
       const galleryMarkup = markup(data);
       gallery.insertAdjacentHTML('beforeend', galleryMarkup);
 
-      // Створюємо нову інстанцію SimpleLightbox для нових елементів
+     
       lightbox = new SimpleLightbox('.gallery a', {
         captionsData: 'alt',
         captionDelay: 250,
@@ -70,6 +70,6 @@ function onSubmitForm(event) {
       });
     })
     .finally(() => {
-      removeLoader(); // Видаляємо лоадер після завершення запиту
+      removeLoader(); 
     });
 }
