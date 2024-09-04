@@ -1,24 +1,22 @@
-// Функція для додавання лоадера на інтерфейс
+
 export function addLoader(gallery) {
-  // лоадер
   const loaderHTML = '<span class="loader"></span>';
   
-  //лоадер перед галереєю
-  gallery.insertAdjacentHTML('beforebegin', loaderHTML);
+  
+  gallery.insertAdjacentHTML('afterbegin', loaderHTML);
 }
 
-// Функція для видалення лоадера з інтерфейсу
+
 export function removeLoader() {
-  // Знаходимо елемент лоадера
+
   const loader = document.querySelector('.loader');
   
-  // Якщо лоадер знайдено, видаляємо його з DOM
   if (loader) {
     loader.remove();
   }
 }
 
-// Функція для створення розмітки галереї
+
 export function markup(data) {
   // Створюємо HTML-розмітку для кожного зображення
   return data.hits

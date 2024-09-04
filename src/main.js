@@ -1,43 +1,25 @@
-
 import { getGalleryData } from './js/pixabay-api';
-
-
 import { addLoader, removeLoader, markup } from './js/render-functions';
-
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
-
-
 import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css'; // Імпорт стилів для SimpleLightbox
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
-// Отримуємо форму пошуку
 const form = document.querySelector('.search-form');
-
-// Отримуємо контейнер для галереї
 const gallery = document.querySelector('.gallery');
 
-// Ініціалізуємо SimpleLightbox для галереї
-let lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-});
+// Ініціалізуємо SimpleLightbox
+let lightbox = null;
 
 form.addEventListener('submit', onSubmitForm);
 
 function onSubmitForm(event) {
   event.preventDefault();
 
-  // отримання даних з форми
   const formData = new FormData(event.target);
-
-  // Преобразовуємо FormData у звичайний об'єкт і отримуємо поле пошуку
   const { searchQuery } = Object.fromEntries(formData.entries());
-
-  // Обрізаємо зайві пробіли на початку та в кінці введеного значення
   const searchValue = searchQuery.trim();
 
-  // Якщо значення пошуку порожнє, показуємо помилку і виходимо з функції
   if (!searchValue) {
     iziToast.error({
       title: 'Error',
@@ -47,15 +29,19 @@ function onSubmitForm(event) {
     return;
   }
 
-  // Додаємо анімацію лоадера до інтерфейсу
+  // Очищуємо галерею перед новим запитом
+  gallery.innerHTML = '';
+
+  // Додаємо анімацію лоадера
   addLoader(gallery);
+
+  // Перевіряємо, чи є інстанція lightbox, і чи існують елементи в галереї
+  if (lightbox) {
+    lightbox.destroy(); // Знищуємо попередню інстанцію, якщо вона існує
+  }
 
   getGalleryData(searchValue)
     .then(data => {
-      // Очищаємо галерею перед додаванням нових елементів
-      gallery.innerHTML = '';
-
-      // Якщо за запитом не знайдено зображень, показуємо відповідне сповіщення
       if (data.hits.length === 0) {
         iziToast.info({
           position: 'topRight',
@@ -65,17 +51,17 @@ function onSubmitForm(event) {
         return;
       }
 
-      // Створюємо HTML-розмітку для галереї на основі отриманих даних
+      // Створюємо HTML-розмітку для галереї
       const galleryMarkup = markup(data);
-
-      // Додаємо створену розмітку до контейнера галереї
       gallery.insertAdjacentHTML('beforeend', galleryMarkup);
 
-      // Оновлюємо SimpleLightbox після додавання нових елементів
-      lightbox.refresh();
+      // Створюємо нову інстанцію SimpleLightbox для нових елементів
+      lightbox = new SimpleLightbox('.gallery a', {
+        captionsData: 'alt',
+        captionDelay: 250,
+      });
     })
     .catch(error => {
-      // Якщо виникла помилка, показуємо сповіщення з описом помилки
       console.error('Помилка:', error);
       iziToast.error({
         title: 'Error',
@@ -84,7 +70,6 @@ function onSubmitForm(event) {
       });
     })
     .finally(() => {
-      // Видаляємо лоадер після завершення запиту
-      removeLoader();
+      removeLoader(); // Видаляємо лоадер після завершення запиту
     });
 }
